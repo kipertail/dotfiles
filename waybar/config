@@ -1,0 +1,182 @@
+{
+    // "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "height": 25,
+	// "width": 1100,
+	//"margin-bottom": 3,
+
+    "modules-left": ["hyprland/workspaces", "tray"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "network",
+        "custom/keyboard-layout",
+        "pulseaudio",           // Обычный pulseaudio для динамиков
+        "pulseaudio#microphone", // Отдельный экземпляр для микрофона
+        "battery",
+        "custom/notification"
+    ],
+
+	"wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 40,
+        "icon-theme": "Papirus",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close"
+    },
+
+    // Обычный pulseaudio для динамиков
+	"pulseaudio": {
+	    "format": "{icon}{volume}%",
+	    "format-muted": " ",
+	    "format-icons": {
+	        "headphone": " ",
+	        "hands-free": " ",
+	        "headset": " ",
+	        "phone": " ",
+	        "portable": " ",
+	        "car": " ",
+	        "default": [" ", " ", " "]
+	    },
+	    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+	    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+	    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+	    "scroll-step": 5,
+	    "tooltip": true,
+	    "tooltip-format": "Output: {volume}%"
+	},
+		
+	"pulseaudio#microphone": {
+	    "format": "{format_source}",
+	    "format-source": " {volume}%",
+	    "format-source-muted": " ",
+	    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+	    "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
+	    "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
+	    "scroll-step": 5,
+	    "tooltip": true,
+	    "tooltip-format-source": "Volume: {volume}%"
+	},
+		
+    // Остальные модули оставляем без изменений
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "default": "0"
+        },
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": []
+        }
+    },
+    
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": " ",
+            "none": " ",
+            "dnd-notification": " ",
+            "dnd-none": " "
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+    
+    "memory": {
+        "format": " {used}gb",
+        "tooltip": true,
+        "interval": 2
+    },
+    
+    "clock": {
+        "format": "{:%b %a %d %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    
+    "cpu": {
+        "format": "   {usage}%",
+        "interval": 5,
+        "tooltip": true
+    },
+    
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {capacity}%",
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ]
+    },
+    
+    "backlight": {
+        "format": "{icon}",
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ],
+        "on-scroll-up": "brightnessctl -q set 5%+",
+        "on-scroll-down": "brightnessctl -q set 5%-"
+    },
+    
+    "network": {
+        "format-wifi": " ",
+        "format-ethernet": " {ipaddr}",
+        "tooltip-format": "{ifname}:{essid} {ipaddr}/{cidr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "󰖪 ",
+        "format-alt": "⬇ {bandwidthDownBytes}  ⬆ {bandwidthUpBytes}", 
+        "on-click-right": "~/.config/rofi/rofi-wifi-menu.sh",
+		"interval" : 1	
+    },
+    
+    "bluetooth": {
+        "format": " {status}",
+        "format-disabled": "󰂲 ",
+        "format-connected": "",
+        "tooltip-format": "{device_alias}",
+        "tooltip-format-connected": " {device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}"
+    }
+}

@@ -1,0 +1,258 @@
+* { 
+	font-family: "JetBrainsMono Nerd Font";
+	font-size: 9px;
+	font-weight: bold;
+    min-height: 0;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar {
+    background: rgba(8, 8, 8, 0.3);
+	/* border-radius: 12px; */
+	/* margin: 6px; */
+	border-top-left-radius: 0;
+    border-top-right-radius: 0;
+	/*
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+	*/
+}
+
+tooltip {
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 12px;
+}
+
+/* Левый блок (рабочие столы и трей) */
+#workspaces,
+#tray {
+    background: rgba(10, 10, 10, 0);
+    border-radius: 16px;
+    padding: 3px 8px;
+    margin: 0px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Центральный блок (часы) */
+.modules-center { background: rgba(10, 10, 10, 0);
+    border-radius: 16px;
+    padding: 0px 8px;
+    margin: 0px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Эффект при наведении на центральный блок */
+.modules-center:hover {
+    background: rgba(30, 30, 30, 0.95);
+}
+
+/* Стиль для часов внутри центрального блока */
+.modules-center #clock {
+    background: transparent;
+    color: #ffffff;
+    padding: 0px 8px;
+    margin: 0px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+/* Правый блок - общий фон для всех модулей справа */
+.modules-right {
+    background: rgba(10, 10, 10, 0);
+    border-radius: 16px;
+    padding: 3px 8px;
+    margin: 0px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Эффект при наведении на правый блок */
+.modules-right:hover {
+    background: rgba(30, 30, 30, 0.95);
+}
+
+/* Стили для модулей внутри правого блока */
+.modules-right #network,
+.modules-right #memory,
+.modules-right #network_stats,
+.modules-right #custom-keyboard-layout,
+.modules-right #pulseaudio,           /* Обычный pulseaudio (динамики) */
+.modules-right #pulseaudio.microphone, /* Микрофон */
+.modules-right #battery,
+.modules-right #backlight,
+.modules-right #custom-notification {
+    background: transparent;
+    padding: 3px 4px;
+    margin: 0px 5px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+/* Специфичные стили для микрофона */
+.modules-right #pulseaudio.microphone {
+    font-size: 13px;
+    margin: 0px 5px;
+}
+
+/* Эффекты при наведении на отдельные элементы внутри правого блока */
+.modules-right #network:hover,
+.modules-right #custom-keyboard-layout:hover,
+.modules-right #pulseaudio:hover,
+.modules-right #pulseaudio.microphone:hover,
+.modules-right #battery:hover,
+.modules-right #backlight:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Workspaces */
+#workspaces {
+    padding: 3px 6px;
+}
+
+#workspaces button {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.3);
+    padding: 2px 10px;
+    margin: 0px 2px;
+    border-radius: 12px;
+    font-size: 12px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Все кнопки показывают цифры */
+#workspaces button {
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: normal;
+}
+
+/* Стиль для неактивных рабочих столов */
+#workspaces button:not(.active) {
+    color: #ffffff;
+    background: transparent;
+}
+
+/* Активный рабочий стол */
+#workspaces button.active {
+    background: #808080;
+    color: #000000;
+    padding: 0px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    min-width: 32px;
+    min-height: 2px;
+}
+
+/* Видимые (occupied) рабочие столы */
+#workspaces button.visible {
+    color: #ffffff;
+    font-weight: normal;
+    min-height: 2px;
+}
+
+#workspaces button:hover {
+    background: rgba(128, 128, 128, 0.5);
+    color: #ffffff;
+    min-height: 2px;
+}
+
+/* Специальный стиль для urgent */
+#workspaces button.urgent {
+    background: rgba(224, 108, 117, 0.75);
+    color: #ffffff;
+    min-height: 2px;
+}
+
+/* Tray */
+#tray {
+    padding: 3px 6px;
+}
+
+#tray menu {
+    background: #1e1e1e;
+    color: #ffffff;
+}
+
+.modules-right #memory {
+    font-size: 13px;
+}
+
+/* Network - отключенное состояние */
+.modules-right #network.disconnected,
+.modules-right #network.linked {
+    color: #A9A9A9;
+}
+
+/* PulseAudio для динамиков */
+.modules-right #pulseaudio {
+    font-size: 13px;
+    margin: 0px 0px;
+}
+
+/* Muted состояние для обычного PulseAudio (динамики) */
+.modules-right #pulseaudio.muted {
+    color: #A9A9A9;
+}
+
+/* Микрофон - Muted состояние (используем класс source-muted) */
+.modules-right #pulseaudio.microphone.source-muted {
+    color: #A9A9A9;
+}
+
+.modules-right #pulseaudio.microphone {
+    color: #FF0000;
+}
+
+/* Battery */
+.modules-right #battery {
+    transition: color 0.4s ease;
+    font-size: 14px;
+    margin: 0px 2px;
+}
+
+.modules-right #battery.charging {
+	color: #ffffff;
+	font-size: 14px;
+	margin: 0px 2px;
+}
+
+.modules-right #battery.warning {
+    color: #ffffff;
+    font-size: 16px;
+    margin: 0px 2px;
+}
+
+.modules-right #battery.critical {
+    color: #FF0000;
+    font-size: 16px;
+    margin: 0px 2px;
+}
+
+/* Backlight */
+.modules-right #backlight {
+    font-size: 16px;
+    margin: 0px -1px;
+}
+
+#taskbar {
+    background: rgba(20,20,20,0.7);
+    border-radius: 20px;
+    padding: 10px 15px;
+    margin: 10px;
+}
+
+#taskbar button {
+    background: transparent;
+    border-radius: 12px;
+    margin: 0 6px;
+    padding: 6px;
+}
+
+#taskbar button:hover {
+    background: rgba(255,255,255,0.15);
+}
